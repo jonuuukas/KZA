@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour {
 
 	int playerCounter = 0;
 	public GameObject[] characterSet;
-	GameObject currentPlayer;
+	public static GameObject currentPlayer;
 	Rigidbody playerBody;
-	// Use this for initialization
+	// Use this for 	initialization
 	void Start () {
 		for (int i = 0; i<3; i++) {
 			Debug.Log(characterSet[i].name);
