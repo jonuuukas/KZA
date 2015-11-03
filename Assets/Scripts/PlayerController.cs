@@ -10,9 +10,6 @@ public class PlayerController : MonoBehaviour {
 	Rigidbody playerBody;
 	// Use this for 	initialization
 	void Start () {
-		for (int i = 0; i<3; i++) {
-			Debug.Log(characterSet[i].name);
-		}
 		AssignPlayer (playerCounter);
 	}
 	
@@ -55,5 +52,7 @@ public class PlayerController : MonoBehaviour {
 		playerBody = currentPlayer.GetComponent<Rigidbody> ();
 
 	}
-
+	void OnCollisionEnter(Collision coll){
+		Debug.Log (coll.gameObject.name);
+		}
 }

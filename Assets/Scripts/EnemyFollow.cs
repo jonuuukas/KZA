@@ -29,12 +29,10 @@ public class EnemyFollow : MonoBehaviour {
         if (!hasTarget && moveTimer >= 5.0f) {
             navigator.destination = NextPosition();
             moveTimer = 0;
-            Debug.Log("Kaching");
         }
         
 	}
 	void OnTriggerEnter(Collider col){
-		Debug.Log ("Entered");
 		if (col.gameObject.tag == "Player" && hasTarget==false) {
 			target = col.gameObject.transform;
 			hasTarget = true;
