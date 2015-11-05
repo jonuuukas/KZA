@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	int playerCounter = 0;
 	public GameObject[] characterSet;
 	public static GameObject currentPlayer;
-	Rigidbody playerBody;
+	public static Rigidbody playerBody;
 	// Use this for 	initialization
 	void Start () {
 		AssignPlayer (playerCounter);
@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if (Input.GetKey ("up") || Input.GetKey("w")) {
 			playerBody.AddForce(Vector3.forward);
 		}
@@ -46,8 +45,6 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void AssignPlayer(int i){
-
-
 		currentPlayer = characterSet [i];
 		playerBody = currentPlayer.GetComponent<Rigidbody> ();
 
