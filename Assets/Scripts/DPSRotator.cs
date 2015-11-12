@@ -13,6 +13,7 @@ public class DPSRotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		while(DPSAttack.passive)
 		sphere.RotateAround (center.position, Vector3.up, 90 * Time.fixedDeltaTime);
 	}
 }
