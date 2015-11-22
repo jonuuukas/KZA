@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour {
 			}
 			AssignPlayer(playerCounter);
 		}
-		Debug.Log (playerCounter);
 	}
 	
 	void AssignPlayer(int i){
