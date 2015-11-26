@@ -5,9 +5,10 @@ public class PlayerAI : MonoBehaviour {
 	public Rigidbody playerDps;
 	public Rigidbody playerHeal;
 	public Rigidbody playerTank;
-	public static GameObject currentPlayer;
 	Rigidbody target;
+
 	float K;
+	public static bool onChange = false;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,9 @@ public class PlayerAI : MonoBehaviour {
 			FollowHeal ();
 		if (PlayerController.currentPlayer.name == "PlayerTank")
 			FollowTank();
+		if (onChange == true)
+			Change ();
+		Debug.Log (PlayerController.playerBody.velocity.magnitude);
 	}
 	void FollowDPS(){
 
@@ -56,6 +60,13 @@ public class PlayerAI : MonoBehaviour {
 		var x = K * (target.position - other.position).normalized / (K * K) ;
 		var y = -K * (target.position - other.position).normalized / (K * K * K);
 		return (x + y) * 10;
+	}
+
+	void Change(){
+		playerDps.velocity = Vector3.zero;
+		playerHeal.velocity = Vector3.zero;
+		playerTank.velocity = Vector3.zero;
+		onChange = false;
 	}
 
 }
