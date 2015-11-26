@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void AssignPlayer(int i){
+		PlayerAI.onChange = true;
 		currentPlayer = characterSet [i];
 		playerBody = currentPlayer.GetComponent<Rigidbody> ();
 
