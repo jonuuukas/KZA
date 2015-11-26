@@ -2151,6 +2151,26 @@ Prefab:
       propertyPath: projectileObject
       value: 
       objectReference: {fileID: 196530, guid: 8503fe0b8ca250845982eb2b78e70ff5, type: 2}
+    - target: {fileID: 5422602, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436660, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480182, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19537524, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19560842, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
   m_IsPrefabParent: 0

@@ -15,24 +15,25 @@ public class PlayerAI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (PlayerController.currentPlayer.name == "PlayerDPS")
 			FollowDPS ();
-		else if (PlayerController.currentPlayer.name == "PlayerHealer")
+		if (PlayerController.currentPlayer.name == "PlayerHealer")
 			FollowHeal ();
-		else if (PlayerController.currentPlayer.name == "PlayerTank")
+		if (PlayerController.currentPlayer.name == "PlayerTank")
 			FollowTank();
 	}
 	void FollowDPS(){
 
 		playerHeal.AddForce (getDirection(playerDps,playerHeal));
 		playerTank.AddForce (getDirection(playerDps,playerTank));
-		playerTank.AddForce (getDirection(playerHeal,playerTank));
-		playerHeal.AddForce (getDirection(playerTank,playerHeal));
+		playerTank.AddForce (getDirection(playerHeal,playerTank)*2);
+		playerHeal.AddForce (getDirection(playerTank,playerHeal)*2);
 
 
 	}
 	void FollowHeal(){
+
 
 		playerDps.AddForce (getDirection(playerHeal,playerDps));
 		playerTank.AddForce (getDirection(playerHeal,playerTank));
@@ -42,18 +43,18 @@ public class PlayerAI : MonoBehaviour {
 	}
 	void FollowTank(){
 
-		/*playerHeal.AddForce (getDirection(playerTank,playerHeal));
+		playerHeal.AddForce (getDirection(playerTank,playerHeal));
 		playerDps.AddForce (getDirection(playerTank,playerDps));
 		playerDps.AddForce (getDirection(playerHeal,playerDps));
-		playerHeal.AddForce (getDirection(playerDps,playerHeal));*/
-		
+		playerHeal.AddForce (getDirection(playerDps,playerHeal));
+
 	}
 
 	Vector3 getDirection(Rigidbody target, Rigidbody other){
 
-		K = Vector3.Distance (target.position,other.position) / 2 ;
-		var x = (target.position - other.position).normalized / (K * K) ;
-		var y = -(target.position - other.position).normalized / (K * K * K);
+		K = Vector3.Distance (target.position,other.position) / 3;
+		var x = K * (target.position - other.position).normalized / (K * K) ;
+		var y = -K * (target.position - other.position).normalized / (K * K * K);
 		return (x + y) * 10;
 	}
 

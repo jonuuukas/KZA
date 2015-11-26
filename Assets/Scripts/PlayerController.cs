@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 		if (playerBody.velocity.magnitude > maxSpeed) {
 			playerBody.velocity = playerBody.velocity.normalized * maxSpeed;
 		}
-		Debug.Log (playerBody.velocity.magnitude);
 	}
 	
 	void AssignPlayer(int i){
