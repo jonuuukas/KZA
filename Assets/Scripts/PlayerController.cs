@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject[] characterSet;
 	public static GameObject currentPlayer;
 	public static Rigidbody playerBody;
+	float maxSpeed = 8;
+
 	// Use this for 	initialization
 	void Start () {
 		AssignPlayer (playerCounter);
@@ -41,6 +43,10 @@ public class PlayerController : MonoBehaviour {
 			}
 			AssignPlayer(playerCounter);
 		}
+		if (playerBody.velocity.magnitude > maxSpeed) {
+			playerBody.velocity = playerBody.velocity.normalized * maxSpeed;
+		}
+		Debug.Log (playerBody.velocity.magnitude);
 	}
 	
 	void AssignPlayer(int i){
