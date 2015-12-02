@@ -22,12 +22,14 @@ public class DPSAttack : MonoBehaviour {
 			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == ("Enemy") && getDistance()<=5 )
 			{
+
 				Shoot ();
 			}
 		}
 	}
 
 	float getDistance(){
+		
 			var dist = Mathf.Abs (transform.position.y - Camera.main.transform.position.y);
 			var v3pos = new Vector3 (Input.mousePosition.x,dist, Input.mousePosition.z );
 			v3pos = Camera.main.ScreenToWorldPoint (v3pos);
@@ -36,7 +38,8 @@ public class DPSAttack : MonoBehaviour {
 	}
 
 	Vector3 getDirection(RaycastHit hit){
-		return (hit.collider.gameObject.transform.position - this.transform.position) * 25;
+		return (hit.collider.gameObject.transform.position - this.transform.position);
+
 	}
 
 	Vector3 getPosition(RaycastHit hit){

@@ -25,7 +25,6 @@ public class PlayerAI : MonoBehaviour {
 			FollowTank();
 		if (onChange == true)
 			Change ();
-		Debug.Log (PlayerController.playerBody.velocity.magnitude);
 	}
 	void FollowDPS(){
 
@@ -56,7 +55,7 @@ public class PlayerAI : MonoBehaviour {
 
 	Vector3 getDirection(Rigidbody target, Rigidbody other){
 
-		K = Vector3.Distance (target.position,other.position) / 3;
+		K = Vector3.Distance (target.position,other.position) / 4;
 		var x = K * (target.position - other.position).normalized / (K * K) ;
 		var y = -K * (target.position - other.position).normalized / (K * K * K);
 		return (x + y) * 10;
