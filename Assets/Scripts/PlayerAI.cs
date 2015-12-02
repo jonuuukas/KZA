@@ -40,22 +40,22 @@ public class PlayerAI : MonoBehaviour {
 
 		playerDps.AddForce (getDirection(playerHeal,playerDps));
 		playerTank.AddForce (getDirection(playerHeal,playerTank));
-		playerTank.AddForce (getDirection(playerDps,playerTank));
-		playerDps.AddForce (getDirection(playerTank,playerDps));
+		playerTank.AddForce (getDirection(playerDps,playerTank)*2);
+		playerDps.AddForce (getDirection(playerTank,playerDps)*2);
 
 	}
 	void FollowTank(){
 
 		playerHeal.AddForce (getDirection(playerTank,playerHeal));
 		playerDps.AddForce (getDirection(playerTank,playerDps));
-		playerDps.AddForce (getDirection(playerHeal,playerDps));
-		playerHeal.AddForce (getDirection(playerDps,playerHeal));
+		playerDps.AddForce (getDirection(playerHeal,playerDps)*2);
+		playerHeal.AddForce (getDirection(playerDps,playerHeal)*2);
 
 	}
 
 	Vector3 getDirection(Rigidbody target, Rigidbody other){
 
-		K = Vector3.Distance (target.position,other.position) / 4;
+		K = Vector3.Distance (target.position,other.position) / 8;
 		var x = K * (target.position - other.position).normalized / (K * K) ;
 		var y = -K * (target.position - other.position).normalized / (K * K * K);
 		return (x + y) * 10;
