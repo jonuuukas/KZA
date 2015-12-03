@@ -6,7 +6,6 @@ public class PlayerAI : MonoBehaviour {
 	public Rigidbody playerHeal;
 	public Rigidbody playerTank;
 	Rigidbody target;
-
 	float K;
 	public static bool onChange = false;
 
@@ -17,8 +16,9 @@ public class PlayerAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (PlayerController.currentPlayer.name == "PlayerDPS")
+		if (PlayerController.currentPlayer.name == "PlayerDPS") {
 			FollowDPS ();
+		}
 		if (PlayerController.currentPlayer.name == "PlayerHealer")
 			FollowHeal ();
 		if (PlayerController.currentPlayer.name == "PlayerTank")
@@ -67,5 +67,4 @@ public class PlayerAI : MonoBehaviour {
 		playerTank.velocity = Vector3.zero;
 		onChange = false;
 	}
-
 }

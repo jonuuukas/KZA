@@ -15,7 +15,5 @@ public class DPSRotator : MonoBehaviour {
 	void FixedUpdate () {
 		if(DPSAttack.passive)
 		sphere.RotateAround (center.position, Vector3.up , 180 * Time.fixedDeltaTime );
-		Debug.Log ("center" + center.position);
-		Debug.Log ("parent" + center.parent.position);
 	}
 }
