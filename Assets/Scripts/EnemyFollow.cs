@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyFollow : MonoBehaviour {
 	Transform target;
 	NavMeshAgent navigator;
-	SphereCollider trigger;
+	//SphereCollider trigger;
 	bool hasTarget = false;
     Vector3 startPosition;
     float moveTimer;
@@ -14,7 +14,7 @@ public class EnemyFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		trigger = GetComponent<SphereCollider> ();
+		//trigger = GetComponent<SphereCollider> ();
 		navigator = GetComponent<NavMeshAgent> ();
         startPosition = transform.position;
         

@@ -411,6 +411,34 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Radius
+      value: 1.10401106
+      objectReference: {fileID: 0}
+    - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.y
+      value: 1.38999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.x
+      value: -.0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.z
+      value: .0900000036
+      objectReference: {fileID: 0}
+    - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Radius
+      value: 1.17324829
+      objectReference: {fileID: 0}
+    - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.y
+      value: 1.19000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.x
+      value: .180000007
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
   m_IsPrefabParent: 0
@@ -439,8 +467,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.21426344
+  m_Center: {x: .230000004, y: -1.54999995, z: -.119999997}
 --- !u!4 &158321347 stripped
 Transform:
   m_PrefabParentObject: {fileID: 422760, guid: 1d46bdd2b3c216c42ac33e5ad496469f, type: 2}
@@ -2298,6 +2326,10 @@ Prefab:
     - target: {fileID: 13577894, guid: e3dcdb42a46e14f4c855dfda41fa3820, type: 2}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411430, guid: e3dcdb42a46e14f4c855dfda41fa3820, type: 2}
+      propertyPath: damage
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e3dcdb42a46e14f4c855dfda41fa3820, type: 2}
