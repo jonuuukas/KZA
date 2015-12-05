@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9491da5812768f745b3fb0b1dc130440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 0
   maxHealthPoints: 100
 --- !u!114 &11424970
 MonoBehaviour:
@@ -396,6 +397,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

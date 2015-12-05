@@ -13,5 +13,6 @@ public class CollDebug : MonoBehaviour {
 
 	}
 	void OnCollisionEnter(Collision coll){
+        //Debug.Log(coll);
 	}
 }

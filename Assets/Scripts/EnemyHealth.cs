@@ -26,7 +26,6 @@ public class EnemyHealth : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-        Debug.Log(coll);
 		if (coll.transform.tag == "Projectile" && !isDead) {
 			Debug.Log ("hit");	
 			getDamage (10);

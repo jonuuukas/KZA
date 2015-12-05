@@ -32,12 +32,24 @@ public class EnemyFollow : MonoBehaviour {
         }
         
 	}
-	void OnTriggerEnter(Collider col){
-		if (col.gameObject.tag == "Player" && hasTarget==false) {
-			target = col.gameObject.transform;
-			hasTarget = true;
-		}
-	}
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && hasTarget == false)
+        {
+            target = col.gameObject.transform;
+            hasTarget = true;
+        }   
+    }
+
+    void OnTriggerExit(Collider col)
+    { 
+        if (col.gameObject.tag == "Player" && hasTarget == true)
+        {
+            target = null;
+            hasTarget = false;
+        }
+    }
+
     Vector3 NextPosition(){
         nextX = (Random.value - 0.5f) * 10;
         nextZ = (Random.value - 0.5f) * 10;
