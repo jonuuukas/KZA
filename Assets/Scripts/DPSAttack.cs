@@ -19,13 +19,14 @@ public class DPSAttack : MonoBehaviour {
 	void Update () {
 		if (Input.GetMouseButtonDown(0))
 		{
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == ("Enemy") && getDistance()<=5 && !EnemyHealth.isDead)
-			{
-
-				Shoot ();
-				Debug.Log (hit.transform.name);
-			}
+            if (PlayerController.currentPlayer.name == "PlayerDPS")
+            {
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == ("Enemy") && getDistance() <= 5 && !EnemyHealth.isDead)
+                {
+                    Shoot();
+                }
+            }			
 		}
 	}
 

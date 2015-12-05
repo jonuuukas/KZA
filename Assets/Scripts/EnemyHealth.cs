@@ -18,15 +18,15 @@ public class EnemyHealth : MonoBehaviour {
 		if (healthPoints <= 0) {
 			Destroy (gameObject, 0.5f);
 		}
-
+        healthBar.fillAmount = (float)healthPoints / (float)maxHealthPoints;
     }
 
 	void getDamage(int damagePoints){
 		healthPoints -= damagePoints;
-        healthBar.fillAmount = (float)healthPoints / (float)maxHealthPoints;
 	}
 
 	void OnCollisionEnter(Collision coll){
+        Debug.Log(coll);
 		if (coll.transform.tag == "Projectile" && !isDead) {
 			Debug.Log ("hit");	
 			getDamage (10);
