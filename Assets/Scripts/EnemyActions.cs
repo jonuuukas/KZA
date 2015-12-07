@@ -33,15 +33,15 @@ public class EnemyActions : MonoBehaviour {
         {
             case "PlayerDPS":
                 multiplierByClass = 2;
-                DPSHealth.healthPoints -= damage * multiplierByClass;
+                DPSHealth.currentHealthPoints -= damage * multiplierByClass;
                 break;
             case "PlayerHealer":
                 multiplierByClass = 3;
-                HealerHealth.healthPoints -= damage * multiplierByClass;
+                HealerHealth.currentHealthPoitns -= damage * multiplierByClass;
                 break;
             case "PlayerTank":
                 multiplierByClass = 1;
-                TankHealth.healthPoints -= damage * multiplierByClass;
+                TankHealth.currentHealthPoints -= damage * multiplierByClass;
                 break;
             default:
                 break;
