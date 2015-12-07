@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class EnemyFollow : MonoBehaviour {
-	Transform target;
+	public Transform target;
 	NavMeshAgent navigator;
 	//SphereCollider trigger;
-	bool hasTarget = false;
+	public bool hasTarget = false;
     Vector3 startPosition;
     float moveTimer;
     Vector3 nextPosition;

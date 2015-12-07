@@ -413,7 +413,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
       propertyPath: m_Radius
-      value: 1.10401106
+      value: 7.92999983
       objectReference: {fileID: 0}
     - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
       propertyPath: m_Center.y
@@ -429,7 +429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
       propertyPath: m_Radius
-      value: 1.17324829
+      value: 1.08000004
       objectReference: {fileID: 0}
     - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
       propertyPath: m_Center.y
@@ -437,7 +437,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
       propertyPath: m_Center.x
-      value: .180000007
+      value: .25
+      objectReference: {fileID: 0}
+    - target: {fileID: 13546682, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 13549606, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
+      propertyPath: m_Center.z
+      value: .0399999991
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
@@ -467,7 +475,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.21426344
+  m_Radius: 1.05999994
   m_Center: {x: .230000004, y: -1.54999995, z: -.119999997}
 --- !u!4 &158321347 stripped
 Transform:
@@ -531,6 +539,23 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 161442, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
   m_PrefabInternal: {fileID: 136788279}
+--- !u!114 &209558760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 209558757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462aa1a51f75b6040850125c3f1f7743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singleHealPower: 30
+  massHealPower: 15
+  singleHealManaCost: 10
+  massHealManaCost: 20
+  singleHealCooldown: 4
+  massHealCooldown: 10
 --- !u!114 &209558763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,6 +815,20 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 191804, guid: 23f42b881534e024395152b0f8c2e8d0, type: 2}
   m_PrefabInternal: {fileID: 136788279}
+--- !u!114 &343148495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 343148492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ee14e2ad2bbd747b26bd0fd87aa2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  singleAttackCooldown: .5
+  massTauntCooldown: 10
+  attackDamage: 10
 --- !u!114 &343148498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +840,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab050c3591dbd734e966f0814b5dc50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &343148500
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 343148492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.04999995
+  m_Height: 4.90999985
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.30999994, z: .230000004}
 --- !u!1001 &369137173
 Prefab:
   m_ObjectHideFlags: 0

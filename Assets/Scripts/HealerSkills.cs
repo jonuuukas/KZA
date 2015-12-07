@@ -22,7 +22,8 @@ public class HealerSkills : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (PlayerController.currentPlayer.name == "PlayerHealer")
         {
             if (Input.GetButtonDown("Fire1"))
@@ -63,7 +64,7 @@ public class HealerSkills : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 100))
+                if (Physics.Raycast(ray, out hit, 200))
                 {
                     var target = hit.transform.gameObject;
                     switch (target.name)
@@ -80,10 +81,11 @@ public class HealerSkills : MonoBehaviour {
                         default:
                             break;
                     }
+                    Debug.Log(target);
                     HealerHealth.currentManaPoints -= singleHealManaCost;
-                    Debug.Log("Heal cast on" + target.name);
                     isSingleHealOnCooldown = true;
                     singleHealCooldownPlaceholder = singleHealCooldown;
+                    // Something is broken with mouse click target 
                 }
             }
         }         
