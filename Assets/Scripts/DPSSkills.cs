@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DPSAttack : MonoBehaviour {
+public class DPSSkills : MonoBehaviour {
 
 	public static bool passive = true;
 	private float distance;

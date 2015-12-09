@@ -5,26 +5,48 @@ public class PlayerAI : MonoBehaviour {
 	public Rigidbody playerDps;
 	public Rigidbody playerHeal;
 	public Rigidbody playerTank;
+
+    public GameObject healer;
+    public GameObject dps;
+    public GameObject tank;
+
 	Rigidbody target;
 	float K;
 	public static bool onChange = false;
 
 	// Use this for initialization
 	void Start () {
-			
+        healer = GameObject.Find("PlayerHealer");
+        tank = GameObject.Find("PlayerTank");
+        dps = GameObject.Find("PlayerDPS");
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (PlayerController.currentPlayer.name == "PlayerDPS") {
+		if (PlayerController.currentPlayer.name == "PlayerDPS")
+        {
 			FollowDPS ();
-		}
+            HealerAI();
+            TankAI();
+        }
 		if (PlayerController.currentPlayer.name == "PlayerHealer")
-			FollowHeal ();
+        {
+            FollowHeal();
+            TankAI();
+            DPSAI();
+        }
+        
 		if (PlayerController.currentPlayer.name == "PlayerTank")
-			FollowTank();
+        {
+            FollowTank();
+            HealerAI();
+            DPSAI();
+        }
+			
 		if (onChange == true)
-			Change ();
+        {
+            Change();
+        }			
 	}
 	void FollowDPS(){
 
@@ -67,4 +89,58 @@ public class PlayerAI : MonoBehaviour {
 		playerTank.velocity = Vector3.zero;
 		onChange = false;
 	}
+
+    void TankAI()
+    {
+
+    }
+
+    void DPSAI()
+    {
+
+    }
+
+    void HealerAI()
+    {
+        if ((HealerHealth.currentHealthPoints < 80) && (TankHealth.currentHealthPoints < 80) && (DPSHealth.currentHealthPoints < 80))
+        {
+            if (!healer.GetComponent<HealerSkills>().isMassHealOnCooldown)
+            {
+                if (HealerHealth.currentManaPoints > healer.GetComponent<HealerSkills>().massHealManaCost)
+                {
+                    healer.GetComponent<HealerSkills>().CastMassHeal();
+                }
+            }
+        }
+        if (HealerHealth.currentHealthPoints < 75)
+        {
+            if (!healer.GetComponent<HealerSkills>().isSingleHealOnCooldown)
+            {
+                if (HealerHealth.currentManaPoints > healer.GetComponent<HealerSkills>().singleHealManaCost)
+                {
+                    healer.GetComponent<HealerSkills>().CastSingleHeal(healer);
+                }
+            }
+        }
+        if (TankHealth.currentHealthPoints < 75)
+        {
+            if (!healer.GetComponent<HealerSkills>().isSingleHealOnCooldown)
+            {
+                if (HealerHealth.currentManaPoints > healer.GetComponent<HealerSkills>().singleHealManaCost)
+                {
+                    healer.GetComponent<HealerSkills>().CastSingleHeal(tank);
+                }
+            }
+        }
+        if (DPSHealth.currentHealthPoints < 75)
+        {
+            if (!healer.GetComponent<HealerSkills>().isSingleHealOnCooldown)
+            {
+                if (HealerHealth.currentManaPoints > healer.GetComponent<HealerSkills>().singleHealManaCost)
+                {
+                    healer.GetComponent<HealerSkills>().CastSingleHeal(dps);
+                }
+            }
+        }
+    }
 }

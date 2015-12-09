@@ -8,11 +8,11 @@ public class HealerSkills : MonoBehaviour {
     public int massHealManaCost = 20;
     public float singleHealCooldown = 4.0f;
     public float massHealCooldown = 10.0f;
+    public bool isSingleHealOnCooldown;
+    public bool isMassHealOnCooldown;
 
     private float singleHealCooldownPlaceholder;
     private float massHealCooldownPlaceholder;
-    private bool isSingleHealOnCooldown;
-    private bool isMassHealOnCooldown;
 	// Use this for initialization
 	void Start () {
         isSingleHealOnCooldown = false;
@@ -28,7 +28,13 @@ public class HealerSkills : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                CastSingleHeal();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 200))
+                {
+                    CastSingleHeal(hit.transform.gameObject);
+                }
             }
             if (Input.GetButtonDown("Fire2"))
             {
@@ -55,38 +61,32 @@ public class HealerSkills : MonoBehaviour {
         } 
     }
 
-    public void CastSingleHeal()
+    public void CastSingleHeal(GameObject target)
     {
         if (isSingleHealOnCooldown == false)
         {
             if (HealerHealth.currentManaPoints >= singleHealManaCost)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, 200))
+            {               
+                switch (target.name)
                 {
-                    var target = hit.transform.gameObject;
-                    switch (target.name)
-                    {
-                        case "PlayerHealer":
-                            HealerHealth.currentHealthPoitns += singleHealPower;
-                            break;
-                        case "PlayerTank":
-                            TankHealth.currentHealthPoints += singleHealPower;
-                            break;
-                        case "PlayerDPS":
-                            DPSHealth.currentHealthPoints += singleHealPower;
-                            break;
-                        default:
-                            break;
-                    }
-                    Debug.Log(target);
-                    HealerHealth.currentManaPoints -= singleHealManaCost;
-                    isSingleHealOnCooldown = true;
-                    singleHealCooldownPlaceholder = singleHealCooldown;
-                    // Something is broken with mouse click target 
+                    case "PlayerHealer":
+                        HealerHealth.currentHealthPoints += singleHealPower;
+                        break;
+                    case "PlayerTank":
+                        TankHealth.currentHealthPoints += singleHealPower;
+                        break;
+                    case "PlayerDPS":
+                        DPSHealth.currentHealthPoints += singleHealPower;
+                        break;
+                    default:
+                        break;
                 }
+                Debug.Log(target);
+                HealerHealth.currentManaPoints -= singleHealManaCost;
+                isSingleHealOnCooldown = true;
+                singleHealCooldownPlaceholder = singleHealCooldown;
+                // Something is broken with mouse click target 
+                
             }
         }         
     }
@@ -97,7 +97,7 @@ public class HealerSkills : MonoBehaviour {
         {
             if (HealerHealth.currentManaPoints >= massHealManaCost)
             {
-                HealerHealth.currentHealthPoitns += massHealPower;
+                HealerHealth.currentHealthPoints += massHealPower;
                 TankHealth.currentHealthPoints += massHealPower;
                 DPSHealth.currentHealthPoints += massHealPower;
 

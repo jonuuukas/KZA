@@ -20,7 +20,7 @@ public class UIPlayerHealthbars : MonoBehaviour {
     void Update () {
         tankHealthBar.fillAmount = (float)TankHealth.currentHealthPoints / (float)TankHealth.maxHealthPoints;
         dpsHealthBar.fillAmount = (float)DPSHealth.currentHealthPoints / (float)DPSHealth.maxHealthPoints;
-        healerHealthBar.fillAmount = (float)HealerHealth.currentHealthPoitns / (float)HealerHealth.maxHealthPoints;
+        healerHealthBar.fillAmount = (float)HealerHealth.currentHealthPoints / (float)HealerHealth.maxHealthPoints;
         healerManaBar.fillAmount = (float)HealerHealth.currentManaPoints / (float)HealerHealth.maxManaPoints;
     }
 }
