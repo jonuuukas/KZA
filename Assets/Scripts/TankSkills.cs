@@ -13,7 +13,7 @@ public class TankSkills : MonoBehaviour {
     private bool isSingleAttackOnCooldown;
     private bool isMassTauntOnCooldown;
 
-    private List<GameObject> EnemiesInRange = new List<GameObject>();
+    public List<GameObject> EnemiesInRange = new List<GameObject>();
     // Use this for initialization
     void Start ()
     {
@@ -30,8 +30,13 @@ public class TankSkills : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                SingleAttack();
-                Debug.Log(EnemiesInRange.Count);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 200))
+                {
+                    SingleAttack(hit.transform.gameObject);
+                }
             }
             if (Input.GetButtonDown("Fire2"))
             {
@@ -56,30 +61,34 @@ public class TankSkills : MonoBehaviour {
                 isMassTauntOnCooldown = false;
             }
         }
+
+        if (EnemiesInRange.Count > 0)
+        {
+            foreach (var enemy in EnemiesInRange.ToList())
+            {
+                if (enemy == null)
+                {
+                    EnemiesInRange.Remove(enemy);
+                }
+            }
+        }
     }
 
-    public void SingleAttack()
+    public void SingleAttack(GameObject target)
     {
         if (isSingleAttackOnCooldown == false)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100))
+            if (target.tag == "Enemy")
             {
-                var target = hit.transform.gameObject;
-                if (target.tag == "Enemy")
+                if ((Vector3.Distance(this.gameObject.transform.position, target.gameObject.transform.position)) < 3.8f)
                 {
-                    if ((Vector3.Distance(this.gameObject.transform.position, target.gameObject.transform.position)) < 3.5)
-                    {
-                        var targetHealth = target.GetComponent<EnemyHealth>();
-                        targetHealth.healthPoints -= attackDamage;
-                        // Can do something here about setting target of the enemy
-                        isSingleAttackOnCooldown = true;
-                        singleAttackCooldownPlaceholder = singleAttackCooldown;
-                    }                  
-                }
-            }
+                    var targetHealth = target.GetComponent<EnemyHealth>();
+                    targetHealth.healthPoints -= attackDamage;
+                    // Can do something here about setting target of the enemy
+                    isSingleAttackOnCooldown = true;
+                    singleAttackCooldownPlaceholder = singleAttackCooldown;
+                }                  
+            }           
         }
     }
 

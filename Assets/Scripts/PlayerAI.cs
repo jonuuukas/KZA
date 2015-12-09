@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class PlayerAI : MonoBehaviour {
 	public Rigidbody playerDps;
@@ -10,6 +11,9 @@ public class PlayerAI : MonoBehaviour {
     public GameObject dps;
     public GameObject tank;
 
+    private bool isEnemyInTanksRange;
+    private GameObject tanksTarget;
+
 	Rigidbody target;
 	float K;
 	public static bool onChange = false;
@@ -19,19 +23,35 @@ public class PlayerAI : MonoBehaviour {
         healer = GameObject.Find("PlayerHealer");
         tank = GameObject.Find("PlayerTank");
         dps = GameObject.Find("PlayerDPS");
+
+        isEnemyInTanksRange = false;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (PlayerController.currentPlayer.name == "PlayerDPS")
         {
-			FollowDPS ();
-            HealerAI();
+            if (isEnemyInTanksRange)
+            {
+                FollowDPSWithoutTank();               
+            }
+            else
+            {
+                FollowDPS();
+            }
             TankAI();
+            HealerAI();           
         }
 		if (PlayerController.currentPlayer.name == "PlayerHealer")
         {
-            FollowHeal();
+            if (isEnemyInTanksRange)
+            {
+                FollowHealWithoutTank();             
+            }
+            else
+            {
+                FollowHeal();
+            }
             TankAI();
             DPSAI();
         }
@@ -55,10 +75,8 @@ public class PlayerAI : MonoBehaviour {
 		playerTank.AddForce (getDirection(playerHeal,playerTank)*2);
 		playerHeal.AddForce (getDirection(playerTank,playerHeal)*2);
 
-
 	}
 	void FollowHeal(){
-
 
 		playerDps.AddForce (getDirection(playerHeal,playerDps));
 		playerTank.AddForce (getDirection(playerHeal,playerTank));
@@ -66,7 +84,21 @@ public class PlayerAI : MonoBehaviour {
 		playerDps.AddForce (getDirection(playerTank,playerDps)*2);
 
 	}
-	void FollowTank(){
+    void FollowDPSWithoutTank()
+    {
+
+        playerHeal.AddForce(getDirection(playerDps, playerHeal));
+        playerHeal.AddForce(getDirection(playerDps, playerHeal) * 2);
+
+    }
+    void FollowHealWithoutTank()
+    {
+
+        playerDps.AddForce(getDirection(playerHeal, playerDps));
+        playerDps.AddForce(getDirection(playerTank, playerDps) * 2);
+
+    }
+    void FollowTank(){
 
 		playerHeal.AddForce (getDirection(playerTank,playerHeal));
 		playerDps.AddForce (getDirection(playerTank,playerDps));
@@ -92,7 +124,45 @@ public class PlayerAI : MonoBehaviour {
 
     void TankAI()
     {
+        if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 2)
+        {
+            tank.GetComponent<TankSkills>().MassTaunt();
+            Debug.Log("AI mass taunt");
+        }
+        if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 0)
+        {
+            isEnemyInTanksRange = true;
+            tanksTarget = tank.GetComponent<TankSkills>().EnemiesInRange.OrderBy(e => Vector3.Distance(tank.transform.position, e.transform.position)).First();
 
+            if (tanksTarget != null)
+            {
+                if (Vector3.Distance(tank.transform.position, tanksTarget.transform.position) > 2.8f)
+                {
+                    Debug.Log(tanksTarget + " " + tanksTarget.GetComponent<EnemyHealth>().healthPoints);
+                    tank.GetComponent<TankSkills>().SingleAttack(tanksTarget);
+                    playerTank.AddForce((tanksTarget.transform.position - tank.transform.position));                    
+                }
+            }
+            else
+            {
+                if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 0)
+                {
+                    tanksTarget = tank.GetComponent<TankSkills>().EnemiesInRange.OrderBy(e => Vector3.Distance(tank.transform.position, e.transform.position)).First();
+                }
+                else
+                {
+                    isEnemyInTanksRange = false;
+                }               
+            }
+        }
+        else
+        {
+            isEnemyInTanksRange = false;
+        }
+        //if (TankHealth.currentHealthPoints < 15)
+        //{
+        //    isEnemyInTanksRange = false;
+        //}
     }
 
     void DPSAI()
