@@ -31,7 +31,7 @@ public class HealerSkills : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 200))
+                if (Physics.Raycast(ray, out hit))
                 {
                     CastSingleHeal(hit.transform.gameObject);
                 }

@@ -11,8 +11,8 @@ public class DPSSkills : MonoBehaviour {
 
 	private float distance;
 	public float projSpeed = 600f;
-	public float singleAttackCooldown = 0.5f;
-	public float massAttackCooldown = 2f;
+	public float singleAttackCooldown = 1.5f;
+	public float massAttackCooldown = 5.0f;
 
 
 	public static int attackDamage = 10;
@@ -24,8 +24,6 @@ public class DPSSkills : MonoBehaviour {
 
 	GameObject target;
 	GameObject clone;
-	Ray ray;
-	RaycastHit hit;
 
 	void Start () {
 		passive = true;
@@ -38,22 +36,27 @@ public class DPSSkills : MonoBehaviour {
 	void Update () {
 		if (PlayerController.currentPlayer.name == "PlayerDPS")
 		{
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("Fire1"))
             {
-				if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == ("Enemy") && getDistance() <= 5 && !EnemyHealth.isDead && !isSingleAttackOnCooldown)
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
                 {
-					target = hit.transform.gameObject;
-                    Shoot();
+                    Shoot(hit.transform.gameObject);
                 }
             }
-		
-				if (Input.GetMouseButtonDown (1)) {
-				if (Physics.Raycast(ray, out hit) && getDistance() <= 5 && !isMassAttackOnCooldown)
-				{
-					MassAttack ();
-				}
-				}
+            if (Input.GetButtonDown("Fire2"))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    MassAttack(hit.point);
+                }
+            }
+
 		if (isSingleAttackOnCooldown == true)
 		{
 			singleAttackCooldownPlaceholder -= Time.deltaTime;
@@ -62,14 +65,14 @@ public class DPSSkills : MonoBehaviour {
 				isSingleAttackOnCooldown = false;
 			}
 		}
-			if (isMassAttackOnCooldown == true)
+		if (isMassAttackOnCooldown == true)
+		{
+			massAttackCooldownPlaceholder -= Time.deltaTime;
+			if (massAttackCooldownPlaceholder < 0)
 			{
-				massAttackCooldownPlaceholder -= Time.deltaTime;
-				if (massAttackCooldownPlaceholder < 0)
-				{
-					isMassAttackOnCooldown = false;
-				}
+				isMassAttackOnCooldown = false;
 			}
+		}
 	}
 }
 
@@ -91,18 +94,43 @@ public class DPSSkills : MonoBehaviour {
 		return (hit.collider.gameObject.transform.position - (transform.position - projectile.transform.position)* 3);
 	}
 
-	void Shoot(){
-		var targetHealth = target.GetComponent<EnemyHealth>();
-			targetHealth.healthPoints -= attackDamage;
-			isSingleAttackOnCooldown = true;
-			singleAttackCooldownPlaceholder = singleAttackCooldown;
-			clone = Instantiate(projectileObject, getPosition(hit), transform.rotation) as GameObject;
-			clone.GetComponent<Rigidbody> ().AddForce (-(clone.transform.position-hit.collider.transform.position) * projSpeed);
-			Destroy (clone, 0.2f);
+	public void Shoot(GameObject target)
+    {
+        if (isSingleAttackOnCooldown == false)
+        {
+            if (target.tag == "Enemy")
+            {
+                var targetHealth = target.GetComponent<EnemyHealth>();
+                if (targetHealth.healthPoints > 0)
+                {
+                    if ((Vector3.Distance(this.gameObject.transform.position, target.gameObject.transform.position)) < 30.0f)
+                    {
+
+                        targetHealth.healthPoints -= attackDamage;
+                        // Can do something here about setting target of the enemy
+                        isSingleAttackOnCooldown = true;
+                        singleAttackCooldownPlaceholder = singleAttackCooldown;
+
+                        //clone = Instantiate(projectileObject, getPosition(hit), transform.rotation) as GameObject;
+                        //clone.GetComponent<Rigidbody>().AddForce(-(clone.transform.position - hit.collider.transform.position) * projSpeed);
+                        //Destroy(clone, 0.2f);
+                        Debug.Log("Single shoot " + singleAttackCooldownPlaceholder);
+                    }
+                }              
+            }
+        }
 	}
-	void MassAttack(){
-		Instantiate (massAttack, hit.point + new Vector3(0,10,0), transform.rotation);
-		isMassAttackOnCooldown = true;
-		massAttackCooldownPlaceholder = massAttackCooldown;
+	public void MassAttack(Vector3 target)
+    {
+        if (isMassAttackOnCooldown == false)
+        {
+            if (getDistance() <= 5)
+            {
+                Instantiate(massAttack, target + new Vector3(0, 10, 10), transform.rotation);
+                isMassAttackOnCooldown = true;
+                massAttackCooldownPlaceholder = massAttackCooldown;
+                Debug.Log("Mass shoot " + massAttackCooldownPlaceholder);
+            }
+        }		
 	}
 }

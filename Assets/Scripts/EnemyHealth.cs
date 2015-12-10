@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour {
     public int healthPoints;
     public int maxHealthPoints = 100;
     private Image healthBar;
-	public static bool isDead = false;
+	public bool isDead = false;
     // Use this for initialization
     void Start () {
         healthPoints = maxHealthPoints;
@@ -16,7 +16,7 @@ public class EnemyHealth : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (healthPoints <= 0) {
-			Destroy (gameObject, 0.5f);
+			Destroy (gameObject, 0.2f);
 		}
         healthBar.fillAmount = (float)healthPoints / (float)maxHealthPoints;
     }

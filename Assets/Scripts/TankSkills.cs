@@ -33,7 +33,7 @@ public class TankSkills : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
-                if (Physics.Raycast(ray, out hit, 200))
+                if (Physics.Raycast(ray, out hit))
                 {
                     SingleAttack(hit.transform.gameObject);
                 }

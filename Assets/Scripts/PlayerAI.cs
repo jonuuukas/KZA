@@ -127,7 +127,6 @@ public class PlayerAI : MonoBehaviour {
         if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 2)
         {
             tank.GetComponent<TankSkills>().MassTaunt();
-            Debug.Log("AI mass taunt");
         }
         if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 0)
         {
@@ -138,7 +137,6 @@ public class PlayerAI : MonoBehaviour {
             {
                 if (Vector3.Distance(tank.transform.position, tanksTarget.transform.position) > 2.8f)
                 {
-                    Debug.Log(tanksTarget + " " + tanksTarget.GetComponent<EnemyHealth>().healthPoints);
                     tank.GetComponent<TankSkills>().SingleAttack(tanksTarget);
                     playerTank.AddForce((tanksTarget.transform.position - tank.transform.position));                    
                 }
