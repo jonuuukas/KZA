@@ -169,9 +169,12 @@ public class PlayerAI : MonoBehaviour {
         {
             dps.GetComponent<DPSSkills>().MassAttack(tank.transform.position);
         }
-        if (isEnemyInTanksRange == true)
+        if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 0)
         {
-            dps.GetComponent<DPSSkills>().Shoot(tanksTarget);
+            if (tank.GetComponent<TankSkills>().tanksTarget != null)
+            {
+                dps.GetComponent<DPSSkills>().Shoot(tank.GetComponent<TankSkills>().tanksTarget);
+            }          
         }
     }
 

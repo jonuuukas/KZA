@@ -75,6 +75,14 @@ public class TankSkills : MonoBehaviour {
                 }
             }
         }
+
+        foreach (var enemy in EnemiesInRange.ToList())
+        {
+            if (enemy == null)
+            {
+                EnemiesInRange.Remove(enemy);
+            }
+        }
     }
 
     public void SingleAttack(GameObject target)
@@ -83,15 +91,22 @@ public class TankSkills : MonoBehaviour {
         {
             if (target.tag == "Enemy")
             {
-                if ((Vector3.Distance(this.gameObject.transform.position, target.gameObject.transform.position)) < 3.8f)
+                var targetHealth = target.GetComponent<EnemyHealth>();
+                if (targetHealth.healthPoints > 0)
                 {
-                    var targetHealth = target.GetComponent<EnemyHealth>();
-                    targetHealth.healthPoints -= attackDamage;
-                    // Can do something here about setting target of the enemy
-                    tanksTarget = target;
-                    isSingleAttackOnCooldown = true;
-                    singleAttackCooldownPlaceholder = singleAttackCooldown;
-                }                  
+                    if ((Vector3.Distance(this.gameObject.transform.position, target.gameObject.transform.position)) < 3.8f)
+                    {
+                        targetHealth.healthPoints -= attackDamage;
+                        // Can do something here about setting target of the enemy
+                        tanksTarget = target;
+                        isSingleAttackOnCooldown = true;
+                        singleAttackCooldownPlaceholder = singleAttackCooldown;
+                    }
+                }
+                else
+                {
+                    tanksTarget = null;
+                }                           
             }           
         }
     }
