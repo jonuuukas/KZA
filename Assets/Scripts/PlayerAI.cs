@@ -165,7 +165,14 @@ public class PlayerAI : MonoBehaviour {
 
     void DPSAI()
     {
-
+        if (tank.GetComponent<TankSkills>().EnemiesInRange.Count > 2)
+        {
+            dps.GetComponent<DPSSkills>().MassAttack(tank.transform.position);
+        }
+        if (isEnemyInTanksRange == true)
+        {
+            dps.GetComponent<DPSSkills>().Shoot(tanksTarget);
+        }
     }
 
     void HealerAI()

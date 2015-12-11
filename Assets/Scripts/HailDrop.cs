@@ -17,9 +17,7 @@ public class HailDrop : MonoBehaviour {
 	}
 	void OnCollisionEnter(Collision coll)
     {
-		Debug.Log ("HIIIIIT");
 		if (coll.gameObject.tag == "Enemy") {
-			Debug.Log ("HIIIIIIIIT");
 			var targetHealth = coll.gameObject.GetComponent<EnemyHealth>();
 			targetHealth.healthPoints -= DPSSkills.attackDamage;
 		}		

@@ -126,7 +126,7 @@ public class DPSSkills : MonoBehaviour {
         {
             if (getDistance() <= 5)
             {
-                Instantiate(massAttack, target + new Vector3(0, 10, 10), transform.rotation);
+                Instantiate(massAttack, target + new Vector3(0, 10, 15), transform.rotation);
                 isMassAttackOnCooldown = true;
                 massAttackCooldownPlaceholder = massAttackCooldown;
                 Debug.Log("Mass shoot " + massAttackCooldownPlaceholder);

@@ -14,9 +14,12 @@ public class TankSkills : MonoBehaviour {
     private bool isMassTauntOnCooldown;
 
     public List<GameObject> EnemiesInRange = new List<GameObject>();
+    public GameObject tanksTarget;
+
     // Use this for initialization
     void Start ()
     {
+        tanksTarget = null;
         isSingleAttackOnCooldown = false;
         isMassTauntOnCooldown = false;
         singleAttackCooldownPlaceholder = 0.0f;
@@ -85,6 +88,7 @@ public class TankSkills : MonoBehaviour {
                     var targetHealth = target.GetComponent<EnemyHealth>();
                     targetHealth.healthPoints -= attackDamage;
                     // Can do something here about setting target of the enemy
+                    tanksTarget = target;
                     isSingleAttackOnCooldown = true;
                     singleAttackCooldownPlaceholder = singleAttackCooldown;
                 }                  
